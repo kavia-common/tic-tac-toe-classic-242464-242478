@@ -1,104 +1,278 @@
-/* CSS Variables for Theme Management */
+/* CSS Variables for Theme Management (retro + modern) */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+    --bg-primary: #f9fafb;
+    --bg-secondary: #ffffff;
+    --text-primary: #111827;
+    --text-muted: rgba(17, 24, 39, 0.7);
+
+    --border-color: rgba(17, 24, 39, 0.12);
+
+    /* Retro-ish neon accents */
+    --accent-primary: #3b82f6; /* electric blue */
+    --accent-secondary: #06b6d4; /* cyan */
+    --accent-danger: #ef4444;
+
+    --shadow: 0 18px 60px rgba(0, 0, 0, 0.12);
+
+    --grid-line: rgba(17, 24, 39, 0.18);
+    --square-bg: rgba(255, 255, 255, 0.9);
+
+    --x-color: #3b82f6;
+    --o-color: #06b6d4;
+
+    --btn-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.95), rgba(6, 182, 212, 0.95));
+    --btn-text: #ffffff;
+
+    --radius: 16px;
+    --mono-font: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+        monospace;
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+[data-theme='dark'] {
+    --bg-primary: #070a12;
+    --bg-secondary: rgba(17, 24, 39, 0.7);
+    --text-primary: #e5e7eb;
+    --text-muted: rgba(229, 231, 235, 0.7);
+
+    --border-color: rgba(229, 231, 235, 0.14);
+
+    --shadow: 0 18px 80px rgba(0, 0, 0, 0.5);
+
+    --grid-line: rgba(229, 231, 235, 0.18);
+    --square-bg: rgba(17, 24, 39, 0.7);
+
+    --x-color: #60a5fa;
+    --o-color: #22d3ee;
+
+    --btn-bg: linear-gradient(135deg, rgba(96, 165, 250, 0.95), rgba(34, 211, 238, 0.95));
+    --btn-text: #0b1220;
 }
 
 .App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+    min-height: 100vh;
+    background: radial-gradient(900px 600px at 10% 10%, rgba(59, 130, 246, 0.18), transparent 55%),
+        radial-gradient(900px 600px at 90% 30%, rgba(6, 182, 212, 0.16), transparent 55%),
+        radial-gradient(900px 600px at 60% 90%, rgba(239, 68, 68, 0.08), transparent 60%),
+        var(--bg-primary);
+    color: var(--text-primary);
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
-}
-
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.ttt-page {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 48px 16px;
+    position: relative;
 }
 
 .theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    padding: 10px 14px;
+
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
 .theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
 }
 
 .theme-toggle:active {
-  transform: translateY(0);
+    transform: translateY(0);
+    opacity: 0.95;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ttt-card {
+    width: min(520px, 100%);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 28px 22px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
+.ttt-header {
+    margin-bottom: 14px;
+}
+
+.ttt-title {
+    margin: 0;
+    font-family: var(--mono-font);
+    font-size: 34px;
+    line-height: 1.1;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.ttt-subtitle {
+    margin: 8px 0 0;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.ttt-status {
+    font-family: var(--mono-font);
+    font-size: 16px;
+    padding: 12px 14px;
+    border: 1px dashed var(--border-color);
+    border-radius: 12px;
+    margin: 18px 0 18px;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.ttt-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 10px;
+    border-radius: 18px;
+    border: 1px solid var(--border-color);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+}
+
+.ttt-square {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    border-radius: 14px;
+    border: 1px solid var(--grid-line);
+    background: var(--square-bg);
+
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+
+    transition: transform 0.08s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+}
+
+.ttt-square:hover {
+    transform: translateY(-1px);
+    border-color: rgba(59, 130, 246, 0.45);
+}
+
+.ttt-square:active {
+    transform: translateY(0);
+}
+
+.ttt-square:focus-visible {
+    outline: 3px solid rgba(6, 182, 212, 0.5);
+    outline-offset: 2px;
+}
+
+.ttt-square--win {
+    border-color: rgba(239, 68, 68, 0.65);
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12), 0 18px 38px rgba(239, 68, 68, 0.12);
+}
+
+.ttt-mark {
+    font-family: var(--mono-font);
+    font-size: clamp(44px, 7vw, 64px);
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    line-height: 1;
+    text-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+}
+
+.ttt-mark--x {
+    color: var(--x-color);
+}
+
+.ttt-mark--o {
+    color: var(--o-color);
+}
+
+.ttt-actions {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+}
+
+.ttt-btn {
+    border: none;
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    font-family: var(--mono-font);
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+
+    padding: 12px 18px;
+    border-radius: 14px;
+
+    cursor: pointer;
+    box-shadow: 0 14px 40px rgba(59, 130, 246, 0.18);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.ttt-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 18px 55px rgba(6, 182, 212, 0.18);
+}
+
+.ttt-btn:active {
+    transform: translateY(0);
+    opacity: 0.96;
+}
+
+.ttt-btn:focus-visible {
+    outline: 3px solid rgba(59, 130, 246, 0.45);
+    outline-offset: 3px;
+}
+
+.ttt-footer {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+}
+
+.ttt-hint {
     font-size: 12px;
-  }
+    color: var(--text-muted);
+}
+
+/* Mobile tweaks */
+@media (max-width: 480px) {
+    .ttt-card {
+        padding: 22px 16px;
+    }
+
+    .ttt-title {
+        font-size: 28px;
+    }
+
+    .theme-toggle {
+        top: 14px;
+        right: 14px;
+        padding: 9px 12px;
+        font-size: 13px;
+    }
+
+    .ttt-board {
+        gap: 10px;
+        padding: 10px;
+    }
 }
